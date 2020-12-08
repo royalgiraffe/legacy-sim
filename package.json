@@ -22,10 +22,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tegas/legacy-sim.git"
+    "url": "https://github.com/royalgiraffe/legacy-sim.git"
   },
   "author": "Tegas",
-  "homepage": "https://tegas.github.io/legacy-sim/",
+  "homepage": "https://royalgiraffe.github.io/legacy-sim/",
   "devDependencies": {
     "gh-pages": "2.1.1"
   },
