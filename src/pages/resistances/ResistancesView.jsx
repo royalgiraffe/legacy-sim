@@ -23,6 +23,7 @@ const renderWithTooltip = ((text, tooltip) => (<span data-tooltip aria-haspopup=
 const resistancesView = ({
   resistancesTable,
   resistances,
+  clickHandlers,
 }) => (
   <div>
     <div>
@@ -34,8 +35,18 @@ const resistancesView = ({
           </ul>
         </nav>
       </div>
-      <div className='row'>
+      <div className='row columns'>
         <h3>Resistances</h3>
+      </div>
+
+      <div className='row columns'>
+        <p>See <a href='https://royalgiraffe.github.io/resist-guide' >my guide on resistance mechanics</a> for more information about the calculations here.</p>
+      </div>
+
+      <div className='row columns'>
+        <button onClick={clickHandlers.setBvp} class="button primary">Boss attacking player</button>
+        <button onClick={clickHandlers.setPvb} class="button primary">Player attacking boss</button>
+        <button onClick={clickHandlers.setPvp} class="button primary">PvP</button>
       </div>
 
       <div className='row'>

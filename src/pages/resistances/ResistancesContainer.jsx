@@ -10,7 +10,7 @@ class ResistancesContainer extends Component {
     componentWillMount() {
         this.props.initialize({
             health: 5000,
-            resistance: 150,
+            resistance: 25,
             spellPen: 0,
             spellHit: 0,
             attackerLevel: 63,
@@ -195,12 +195,44 @@ class ResistancesContainer extends Component {
         };
     }
 
+    setPvp() {
+        this.props.change('attackerLevel', 60);
+        this.props.change('targetLevel', 60);
+        this.props.change('attackerIsNpc', false);
+        this.props.change('targetIsNpc', false);
+        return true;
+    }
+
+    setBvp() {
+        this.props.change('attackerLevel', 63);
+        this.props.change('targetLevel', 60);
+        this.props.change('attackerIsNpc', true);
+        this.props.change('targetIsNpc', false);
+        return true;
+    }
+
+    setPvb() {
+        this.props.change('attackerLevel', 60);
+        this.props.change('targetLevel', 63);
+        this.props.change('attackerIsNpc', false);
+        this.props.change('targetIsNpc', true);
+        return true;
+    }
+
+    getClickHandlers() {
+        return {
+            setPvp: this.setPvp.bind(this),
+            setBvp: this.setBvp.bind(this),
+            setPvb: this.setPvb.bind(this),
+        }
+    }
     render() {
         return (
                 <ResistancesView
             formValues={ this.props.formValues }
             resistancesTable={ this.computeResistanceTable() }
             resistances={ this.computeResistance() }
+            clickHandlers={ this.getClickHandlers() }
                 />
         );
     }
