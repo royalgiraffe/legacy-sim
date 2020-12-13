@@ -21,10 +21,10 @@ export default class About extends Component {
             Legacy Sim is a theorycrafting combat simulation tool for vanilla WoW.
           </p>
           <p>
-            Created by Tegas. A few small updates by Royalgiraffe.
+            Created by Tegas. New resistance calculator by Royalgiraffe, everything else by Tegas.
           </p>
           <p>
-            <a href='https://github.com/Tegas/legacy-sim'>Github</a>
+            <a href='https://github.com/royalgiraffe/legacy-sim'>Github</a>
           </p>
         </div>
       </div>
