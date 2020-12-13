@@ -15,6 +15,8 @@ import {
 // import { routeCodes } from '../../views/App';
 
 const chartColors = ['blue', 'red', 'orange', 'green'];
+const resistanceTicks = [];
+for (let i = 0; i <= 315; i += 35) { resistanceTicks.push(i); }
  
 const resistancesView = ({
   resistancesTable,
@@ -34,29 +36,6 @@ const resistancesView = ({
         <h3>Resistances</h3>
       </div>
       <div className='row'>
-        <div className='medium-8 large-6 columns'>
-          <h5>Average Mitigation %</h5>
-          <ResponsiveContainer aspect={ 2 } >
-            <ComposedChart data={ resistancesTable.averages } margin={ { top: 10, right: 0, left: 0, bottom: 0 } } >
-              <Line dataKey='avg mitigation %' stroke='blue' isAnimationActive={ false } dot={ false } />
-              <XAxis dataKey='resistance' />
-              <YAxis />
-              <Tooltip isAnimationActive={ false } />
-              <CartesianGrid strokeDasharray='3 3' />
-            </ComposedChart>
-          </ResponsiveContainer>
-          <h5>Effective HP</h5>
-          <ResponsiveContainer aspect={ 2 } >
-            <ComposedChart data={ resistancesTable.averages } margin={ { top: 10, right: 0, left: 0, bottom: 0 } } >
-              <Line dataKey='effectiveHP' stroke='green' isAnimationActive={ false } dot={ false } />
-              <XAxis dataKey='resistance' />
-              <YAxis />
-              <Tooltip isAnimationActive={ false } />
-              <CartesianGrid strokeDasharray='3 3' />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-
         <div className='medium-4 large-6 columns'>
           <div className='medium-4'>
             <label htmlFor='health'>Target Health
@@ -113,32 +92,56 @@ const resistancesView = ({
 
       <div className='row'>
         <div className='columns'>
-          <h4>Resistance values</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>Avg Damage Mitigation</td>
-                <td>{resistances.damageReduction}%</td>
-              </tr>
-              <tr>
-                <td>Effective HP</td>
-                <td>{resistances.effectiveHealth}</td>
-              </tr>
-              <tr>
-                <td>Avg Mitigation value per Resistance</td>
-                <td>{resistances.mitValueOfOneResist}%</td>
-              </tr>
-              <tr>
-                <td>EHP value per Resistance</td>
-                <td>{resistances.ehpValueofOneResist}</td>
-              </tr>
-              <tr>
-                <td>EHP value per Stamina</td>
-                <td>{resistances.ehpValueOfTenHealth}</td>
-              </tr>
-            </tbody>
-          </table>
+          <h4>Average resistance values</h4>
 
+          <div className='row'>
+            <div className='medium-8 large-6 columns'>
+              <ResponsiveContainer aspect={ 2 } >
+                <ComposedChart data={ resistancesTable.averages } margin={ { top: 10, right: 0, left: 0, bottom: 0 } } >
+                  <Line dataKey='avg mitigation %' stroke='blue' isAnimationActive={ false } dot={ false } />
+                  <Line dataKey='effectiveHP' yAxisId='1' stroke='green' isAnimationActive={ false } dot={ false } />
+                  <XAxis dataKey='resistance' ticks={resistanceTicks} />
+                  <YAxis domain={[0,75]} ticks={[0,25,50,75]} />
+                  <YAxis yAxisId='1' orientation='right' />
+                  <Legend />
+                  <Tooltip isAnimationActive={ false } />
+                  <CartesianGrid strokeDasharray='3 3' />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+            
+            <div className='medium-4 large-6 columns'>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Avg Damage Mitigation</td>
+                    <td>{resistances.damageReduction}%</td>
+                  </tr>
+                  <tr>
+                    <td>Effective HP</td>
+                    <td>{resistances.effectiveHealth}</td>
+                  </tr>
+                  <tr>
+                    <td>Avg Mitigation value per Resistance</td>
+                    <td>{resistances.mitValueOfOneResist}%</td>
+                  </tr>
+                  <tr>
+                    <td>EHP value per Resistance</td>
+                    <td>{resistances.ehpValueofOneResist}</td>
+                  </tr>
+                  <tr>
+                    <td>EHP value per Stamina</td>
+                    <td>{resistances.ehpValueOfTenHealth}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='columns'>
           <h4>Resist roll outcomes</h4>
           <p>The chances of each type of partial resist are estimated and likely accurate within a few percent. The true values may also differ due to rounding effects.</p>
 
@@ -151,8 +154,8 @@ const resistancesView = ({
                   <Line dataKey={row[0]} stroke={chartColors[index]} isAnimationActive={ false } dot={ false } />
                   ))
                   }
-                  <XAxis dataKey='resistance' />
-                  <YAxis />
+                  <XAxis dataKey='resistance' ticks={resistanceTicks} />
+                  <YAxis ticks={[0,25,50,75,100]} />
                   <Legend />
                   <Tooltip isAnimationActive={ false } />
                   <CartesianGrid strokeDasharray='3 3' />
@@ -207,7 +210,7 @@ const resistancesView = ({
             Spell hit chance: {resistances.hitPercent}%, miss chance: {resistances.missPercent}%. This is a separate roll from the resistance roll, and multiplies with all of the mitigation figures above for the resistance roll.
           </p>
           <p>
-            Overall average resistance including both spell hit and resistance score: { resistances.overallMitigationIncludingSpellHit }%.
+            Overall average resistance including both spell hit roll and resistance score roll: { resistances.overallMitigationIncludingSpellHit }%.
           </p>
 
           <h4>Spell pen and spell hit values</h4>
