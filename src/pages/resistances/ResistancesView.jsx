@@ -17,6 +17,8 @@ import {
 const chartColors = ['blue', 'red', 'orange', 'green'];
 const resistanceTicks = [];
 for (let i = 0; i <= 315; i += 35) { resistanceTicks.push(i); }
+
+const renderWithTooltip = ((text, tooltip) => (<span data-tooltip aria-haspopup='true' className='has-tip tip-bottom' title={tooltip}>{text} &#9432;</span>))
  
 const resistancesView = ({
   resistancesTable,
@@ -39,7 +41,7 @@ const resistancesView = ({
       <div className='row'>
         <div className='large-3 medium-4 columns'>
           <div>
-            <label htmlFor='resistance'> Target Resistance
+            <label htmlFor='resistance'> {renderWithTooltip('Target Resistance', 'Including any buffs and debuffs')}
               <Field name='resistance' component='input' type='number' min='0' max='315' />
             </label>
           </div>
@@ -89,9 +91,7 @@ const resistancesView = ({
           <div>
             <Field name='binarySpell' id='binarySpell' component='input' type='checkbox' />
             <label htmlFor='binarySpell'>
-              <span data-tooltip aria-haspopup='true' className='has-tip tip-bottom' title='If the spell has a non-damaging effect, e.g. Frostbolt or Fear, it is a binary spell. If the spell only deals damage, e.g. Fireball or Shadow Bolt, it is a non-binary spell.'>
-                Binary Spell
-              </span>
+              {renderWithTooltip('Binary Spell', 'If the spell has a non-damaging effect, e.g. Frostbolt or Fear, it is a binary spell. If the spell only deals damage, e.g. Fireball or Shadow Bolt, it is a non-binary spell.')}
             </label>
           </div>
         </div>
@@ -125,7 +125,7 @@ const resistancesView = ({
                     <td>{resistances.damageReduction}%</td>
                   </tr>
                   <tr>
-                    <td>Effective HP</td>
+                    <td>{renderWithTooltip('Effective HP', "The amount of raw damage before resists that would, on average, after resists, be equal to the target's HP")}</td>
                     <td>{resistances.effectiveHealth}</td>
                   </tr>
                   <tr>
@@ -191,18 +191,16 @@ const resistancesView = ({
             <tbody>
               <tr>
                 <td>
-                  <span data-tooltip aria-haspopup='true' className='has-tip tip-bottom' title='When a player is casting a non-binary spell at an NPC of higher level, the NPC gains 8 resistance per level above the player, which cannot be reduced by Spell Penetration.'>
-                    Level-based resistance
-                  </span>
+                  {renderWithTooltip('Level-based resistance', 'When a player is casting a non-binary spell at an NPC of higher level, the NPC gains 8 resistance per level above the player, which cannot be reduced by Spell Penetration.')}
                 </td>
                 <td>{resistances.levelBasedResistance}</td>
               </tr>
               <tr>
-                <td>Effective resistance</td>
+                <td>{renderWithTooltip('Effective resistance', 'Resistance after subtracting Spell Penetration and adding level-based resistance')}</td>
                 <td>{resistances.effectiveResistance}</td>
               </tr>
               <tr>
-                <td>Resistance cap</td>
+                <td>{renderWithTooltip('Resistance cap', 'Resistance scores above the cap are the same as the cap and do not provide any additional benefit.')}</td>
                 <td>{resistances.resistanceCap}</td>
               </tr>
               <tr>
@@ -213,12 +211,9 @@ const resistancesView = ({
           </table>
 
           <h4>Spell hit/miss roll</h4>
-          <p>
-            Spell hit chance: {resistances.hitPercent}%, miss chance: {resistances.missPercent}%. This is a separate roll from the resistance roll, and multiplies with all of the mitigation figures above for the resistance roll.
-          </p>
-          <p>
-            Overall average resistance including both spell hit roll and resistance score roll: { resistances.overallMitigationIncludingSpellHit }%.
-          </p>
+          <p> Spell hit chance: {resistances.hitPercent}%, miss chance: {resistances.missPercent}%. </p>
+          <p> This is a separate roll from the resistance roll, and multiplies with all of the mitigation figures above for the resistance roll. </p>
+          <p> Overall average resistance including both spell hit roll and resistance score roll: { resistances.overallMitigationIncludingSpellHit }%. </p>
 
           <h4>Spell pen and spell hit values</h4>
 
