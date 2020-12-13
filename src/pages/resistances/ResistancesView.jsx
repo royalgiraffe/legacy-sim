@@ -35,38 +35,45 @@ const resistancesView = ({
       <div className='row'>
         <h3>Resistances</h3>
       </div>
+
       <div className='row'>
-        <div className='medium-4 large-6 columns'>
-          <div className='medium-4'>
-            <label htmlFor='health'>Target Health
-              <Field name='health' component='input' type='number' min='0' />
-            </label>
-          </div>
-          <div className='medium-4'>
+        <div className='large-3 medium-4 columns'>
+          <div>
             <label htmlFor='resistance'> Target Resistance
               <Field name='resistance' component='input' type='number' min='0' max='315' />
             </label>
           </div>
-          <div className='medium-4'>
-            <label htmlFor='spellPen'> Attacker Spell Penetration
-              <Field name='spellPen' component='input' type='number' min='0' max='1000' />
+          <div>
+            <label htmlFor='health'>Target Health
+              <Field name='health' component='input' type='number' min='0' />
             </label>
           </div>
-          <div className='medium-4'>
-            <label htmlFor='spellHit'> Attacker +Spell Hit
-              <Field name='spellHit' component='input' type='number' min='0' max='100' />
-            </label>
-          </div>
-          <div className='medium-4'>
+          <div>
             <label htmlFor='targetLevel'>Target Level
               <Field name='targetLevel' component='input' type='number' min='0' max='63' />
             </label>
           </div>
-          <div className='medium-4'>
+        </div>
+
+        <div className='large-3 medium-4 columns'>
+          <div>
+            <label htmlFor='spellPen'> Attacker Spell Penetration
+              <Field name='spellPen' component='input' type='number' min='0' max='1000' />
+            </label>
+          </div>
+          <div>
+            <label htmlFor='spellHit'> Attacker +Spell Hit
+              <Field name='spellHit' component='input' type='number' min='0' max='100' />
+            </label>
+          </div>
+          <div>
             <label htmlFor='attackerLevel'>Attacker Level
               <Field name='attackerLevel' component='input' type='number' min='0' max='63' />
             </label>
           </div>
+        </div>
+
+        <div className='large-3 medium-4 columns end'>
           <div>
             <Field name='targetIsNpc' id='targetIsNpc' component='input' type='checkbox' />
             <label htmlFor='targetIsNpc'>
@@ -216,7 +223,25 @@ const resistancesView = ({
           <h4>Spell pen and spell hit values</h4>
 
           <div className='row'>
-            <div className='medium-8 large-6 columns'>
+            <div className='large-3 medium-4 columns'>
+              <label htmlFor='spellBaseDmg'>Spell base damage
+                <Field name='spellBaseDmg' component='input' type='number' min='0' />
+              </label>
+            </div>
+            <div className='large-3 medium-4 columns'>
+              <label htmlFor='spellPowerCoefficient'>Spell power coefficient
+                <Field name='spellPowerCoefficient' component='input' type='number' min='0' max='1' />
+              </label>
+            </div>
+            <div className='large-3 medium-4 columns end'>
+              <label htmlFor='spellPower'>Spell power
+                <Field name='spellPower' component='input' type='number' min='0' />
+              </label>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='columns'>
               Stat values (in equivalent Spell Power):
               <table>
                 <tbody>
@@ -231,25 +256,8 @@ const resistancesView = ({
                 </tbody>
               </table>
             </div>
-
-            <div className='medium-4 large-6 columns'>
-              <div className='medium-4'>
-                <label htmlFor='spellBaseDmg'>Spell base damage
-                  <Field name='spellBaseDmg' component='input' type='number' min='0' />
-                </label>
-              </div>
-              <div className='medium-4'>
-                <label htmlFor='spellPowerCoefficient'>Spell power coefficient
-                  <Field name='spellPowerCoefficient' component='input' type='number' min='0' max='1' />
-                </label>
-              </div>
-              <div className='medium-4'>
-                <label htmlFor='spellPower'>Spell power
-                  <Field name='spellPower' component='input' type='number' min='0' />
-                </label>
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
     </div>
