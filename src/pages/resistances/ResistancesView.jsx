@@ -19,8 +19,10 @@ const chartColors = ['blue', 'red', 'orange', 'green'];
 const resistanceTicks = [];
 for (let i = 0; i <= 315; i += 35) { resistanceTicks.push(i); }
 
-const renderWithTooltip = ((text, tooltip) => (<span data-tooltip aria-haspopup='true' className='has-tip tip-bottom' title={tooltip}>{text} &#9432;</span>))
- 
+function TextWithTooltip(props) {
+  return <span data-tooltip aria-haspopup='true' className='has-tip tip-bottom' title={props.tooltip}>{props.text} &#9432;</span>
+}
+
 const resistancesView = ({
   resistancesTable,
   resistances,
@@ -56,7 +58,8 @@ const resistancesView = ({
       <div className='row'>
         <div className='large-3 medium-4 columns'>
           <div>
-            <label htmlFor='resistance'> {renderWithTooltip('Target Resistance', 'Including any buffs and debuffs')}
+            <label htmlFor='resistance'>
+              <TextWithTooltip text='Target Resistance' tooltip='Including any buffs and debuffs' />
               <Field name='resistance' component='input' type='number' min='0' max='315' />
             </label>
           </div>
@@ -106,7 +109,7 @@ const resistancesView = ({
           <div>
             <Field name='binarySpell' id='binarySpell' component='input' type='checkbox' />
             <label htmlFor='binarySpell'>
-              {renderWithTooltip('Binary Spell', 'If the spell has a non-damaging effect, e.g. Frostbolt or Fear, it is a binary spell. If the spell only deals damage, e.g. Fireball or Shadow Bolt, it is a non-binary spell.')}
+              <TextWithTooltip text='Binary Spell' tooltip='If the spell has a non-damaging effect, e.g. Frostbolt or Fear, it is a binary spell. If the spell only deals damage, e.g. Fireball or Shadow Bolt, it is a non-binary spell.' />
             </label>
           </div>
         </div>
@@ -140,7 +143,7 @@ const resistancesView = ({
                     <td>{resistances.damageReduction}%</td>
                   </tr>
                   <tr>
-                    <td>{renderWithTooltip('Effective HP', "The amount of raw damage before resists that would, on average, after resists, be equal to the target's HP")}</td>
+                    <td><TextWithTooltip text='Effective HP' tooltip="The amount of raw damage before resists that would, on average, after resists, be equal to the target's HP" /></td>
                     <td>{resistances.effectiveHealth}</td>
                   </tr>
                   <tr>
@@ -206,16 +209,16 @@ const resistancesView = ({
             <tbody>
               <tr>
                 <td>
-                  {renderWithTooltip('Level-based resistance', 'When a player is casting a non-binary spell at an NPC of higher level, the NPC gains 8 resistance per level above the player, which cannot be reduced by Spell Penetration.')}
+                  <TextWithTooltip text='Level-based resistance' tooltip='When a player is casting a non-binary spell at an NPC of higher level, the NPC gains 8 resistance per level above the player, which cannot be reduced by Spell Penetration.' />
                 </td>
                 <td>{resistances.levelBasedResistance}</td>
               </tr>
               <tr>
-                <td>{renderWithTooltip('Effective resistance', 'Resistance after subtracting Spell Penetration and adding level-based resistance')}</td>
+                <td><TextWithTooltip text='Effective resistance' tooltip='Resistance after subtracting Spell Penetration and adding level-based resistance' /></td>
                 <td>{resistances.effectiveResistance}</td>
               </tr>
               <tr>
-                <td>{renderWithTooltip('Resistance cap', 'Resistance scores above the cap are the same as the cap and do not provide any additional benefit.')}</td>
+                <td><TextWithTooltip text='Resistance cap' tooltip='Resistance scores above the cap are the same as the cap and do not provide any additional benefit.' /></td>
                 <td>{resistances.resistanceCap}</td>
               </tr>
               <tr>
