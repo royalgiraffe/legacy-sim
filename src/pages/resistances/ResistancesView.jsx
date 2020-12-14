@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+import { Helmet } from 'react-helmet';
 // import { routeCodes } from '../../views/App';
 
 const chartColors = ['blue', 'red', 'orange', 'green'];
@@ -26,6 +27,9 @@ const resistancesView = ({
   clickHandlers,
 }) => (
   <div>
+    <Helmet>
+      <title>Resistance Calculator</title>
+    </Helmet>
     <div>
       <div className='row columns'>
         <nav aria-label='You are here:'>

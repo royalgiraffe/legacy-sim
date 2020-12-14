@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 class HomePage extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+        <title>Legacy Sim</title>
+        </Helmet>
         <div className='row columns'>
           <h3>Legacy Sim</h3>
         </div>
