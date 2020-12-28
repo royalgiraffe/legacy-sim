@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/legacy-sim/precache-manifest.76de9e13dd4cf0076ec6368054059493.js"
+  "/legacy-sim/precache-manifest.b04bf6da2915d4536271286ff22cf26d.js"
 );
 
 self.addEventListener('message', (event) => {
