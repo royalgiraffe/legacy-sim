@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, propTypes, getFormValues } from 'redux-form';
 import ResistancesView from './ResistancesView';
-//import '../style.css';
+//import './style.css';
 
 class ResistancesContainer extends Component {
 
@@ -63,8 +63,8 @@ class ResistancesContainer extends Component {
             const reduction = stats.avgMit;
             averages.push({
                 resistance,
-                'avg mitigation %': +(reduction * 100).toFixed(2),
-                effectiveHP: Math.round(health / (1 - reduction)),
+                'Avg Mitigation %': +(reduction * 100).toFixed(2),
+                'Effective HP': Math.round(health / (1 - reduction)),
             });
 
             let resistOutcomes = Object.fromEntries(this.computeResistOutcomes(stats.resistanceRatio, value => (value * 100).toFixed(2)));
@@ -138,6 +138,7 @@ class ResistancesContainer extends Component {
         const targetLevel = +this.props.formValues.targetLevel;
         const attackerIsNpc = +this.props.formValues.attackerIsNpc;
         const targetIsNpc = +this.props.formValues.targetIsNpc;
+        const binarySpell = +this.props.formValues.binarySpell;
 
         const stats = this.computeResistanceStats(resistance);
         const mit = stats.avgMit;
@@ -192,6 +193,7 @@ class ResistancesContainer extends Component {
             overallMitigationIncludingSpellHit: (overallMitigationIncludingSpellHit*100).toFixed(2),
             spellPenValue,
             spellHitValue,
+            binarySpell,
         };
     }
 

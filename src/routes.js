@@ -34,7 +34,6 @@ class Routes extends Component {
     render() {
       return (
         <HashRouter>
-          <Analytics id="UA-106746928-1" debug>
             <Switch>
                 <Route exact path={ publicPath } component={ HomePage } />
                 <Route exact path="/home" component={ HomePage } />
@@ -65,7 +64,6 @@ class Routes extends Component {
                 <Route exact path="/about" component={ AboutPage } />
                 <Route path='*' component={ NotFoundPage } />
             </Switch >
-          </Analytics>
         </HashRouter>
       );
     }
